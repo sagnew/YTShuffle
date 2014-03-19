@@ -52,9 +52,9 @@ var listenToCurrentTrack = function(){
     var seconds = timeArray[1];
     var playTime = (minutes*60 + seconds)*1000;
 
-    setTimeout(function(){
-        playNextTrack();
+    playNextTrack();
 
+    setTimeout(function(){
         timeArray = tracks[current].text().split(":");
         minutes = timeArray[0];
         seconds = timeArray[1];
