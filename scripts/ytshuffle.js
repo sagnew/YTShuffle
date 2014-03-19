@@ -44,3 +44,22 @@ var playNextTrack = function(){
         current = 0;
     }
 };
+
+//Play on repeat indefinitely for now with no way of stopping
+var listenToCurrentTrack = function(){
+    var timeArray = tracks[current].text().split(":");
+    var minutes = timeArray[0];
+    var seconds = timeArray[1];
+    var playTime = (minutes*60 + seconds)*1000;
+
+    setTimeout(function(){
+        playNextTrack();
+
+        timeArray = tracks[current].text().split(":");
+        minutes = timeArray[0];
+        seconds = timeArray[1];
+        playTime = (minutes*60 + seconds)*1000;
+
+        setTimeout(listenToCurrentTrack, playTime);
+    }, playTime);
+}();
