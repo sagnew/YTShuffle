@@ -58,31 +58,41 @@ var playNextTrack = function(){
 var getPlayTime = function(){
     currentTrack = tracks[current];
     var timeArray = currentTrack.track.text().split(":");
-    var minutes = timeArray[0];
-    var seconds = timeArray[1];
+    var minutes = parseInt(timeArray[0], 10);
+    var seconds = parseInt(timeArray[1], 10);
     var currentTrackTime = (minutes*60 + seconds);
+    console.log("Current track: " currentTrack.index);
+    console.log("Current track time: " + currentTrack.track.text());
+    console.log("Current track seconds: " + currentTrackTime);
 
-    //Now get the time of the previous track
-    if(currentTrack.index !== 0){
-        timeArray = tracksInOrder[currentTrack.index - 1].track.text().split(":");
+    //Now get the time of the next track
+    if(currentTrack.index < tracks.length){
+        timeArray = tracksInOrder[currentTrack.index + 1].track.text().split(":");
     }else{
+        //This doesn't work
         timeArray = tracksInOrder[tracksInOrder.length - 1].track.text().split(":");
     }
 
-    minutes = timeArray[0];
-    seconds = timeArray[1];
-    var previousTrackTime = (minutes*60 + seconds);
+    minutes = parseInt(timeArray[0], 10);
+    seconds = parseInt(timeArray[1], 10);
+    var nextTrackTime = (minutes*60 + seconds);
+    console.log("Next track: " tracksInOrder[currentTrack.index + 1].track.text());
+    console.log("Next track time: " + minutes + ":" + seconds);
+    console.log("Next track seconds: " + nextTrackTime);
 
     //The difference between the two is the playtime
-    return (currentTrackTime - previousTrackTime)*1000;
+    return (nextTrackTime - currentTrackTime)*1000;
 };
 
 //Play on repeat indefinitely for now with no way of stopping
 var listenToCurrentTrack = function(){
 
+    var playTime = getPlayTime();
     playNextTrack();
 
     setTimeout(function(){
         listenToCurrentTrack();
-    }, getPlayTime());
+    }, playTime);
 };
+
+listenToCurrentTrack();
