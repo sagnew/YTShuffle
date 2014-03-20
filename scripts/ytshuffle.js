@@ -4,25 +4,29 @@ var current = 0;
 
 //The Knuth shuffling algorithm
 var shuffle = function(array) {
-  var currentIndex = array.length
-    , temporaryValue
-    , randomIndex
-    ;
 
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
+    //Temporary fix
+    var lastTrack = array.pop();
+    var currentIndex = array.length
+        , temporaryValue
+        , randomIndex
+        ;
 
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
 
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
 
-  return array;
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    array.push(lastTrack);
+    return array;
 }
 
 //Function that populates the tracks array with jQuery <a> objects.
@@ -68,9 +72,6 @@ var getPlayTime = function(){
     //Now get the time of the next track
     if(currentTrack.index < tracks.length){
         timeArray = tracksInOrder[currentTrack.index + 1].track.text().split(":");
-    }else{
-        //This doesn't work
-        timeArray = tracksInOrder[tracksInOrder.length - 1].track.text().split(":");
     }
 
     minutes = parseInt(timeArray[0], 10);
