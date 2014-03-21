@@ -16,7 +16,7 @@
     "content_scripts": [
         {
             "matches": ["youtube.com"],
-            "js": ["scripts/ytshuffle.js"]
+            "js": ["jquery.js", "scripts/utilities.js", "scripts/ytshuffle.js"]
         }
     ],
     "browser_action": {
