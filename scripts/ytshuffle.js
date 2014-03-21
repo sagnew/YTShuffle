@@ -5,8 +5,6 @@ var current = 0;
 //The Knuth shuffling algorithm
 var shuffle = function(array) {
 
-    //Temporary fix
-    var lastTrack = array.pop();
     var currentIndex = array.length
         , temporaryValue
         , randomIndex
@@ -25,7 +23,6 @@ var shuffle = function(array) {
         array[randomIndex] = temporaryValue;
     }
 
-    array.push(lastTrack);
     return array;
 }
 
@@ -69,14 +66,18 @@ var getPlayTime = function(){
     console.log("Current track time: " + currentTrack.track.text());
     console.log("Current track seconds: " + currentTrackTime);
 
+    var nextTrackTime;
     //Now get the time of the next track
     if(currentTrack.index < tracks.length){
         timeArray = tracksInOrder[currentTrack.index + 1].track.text().split(":");
+        minutes = parseInt(timeArray[0], 10);
+        seconds = parseInt(timeArray[1], 10);
+        nextTrackTime = (minutes*60 + seconds);
+    }else{
+        ytplayer = document.getElementById("movie_player");
+        nextTrackTime = ytplayer.getDuration();
     }
 
-    minutes = parseInt(timeArray[0], 10);
-    seconds = parseInt(timeArray[1], 10);
-    var nextTrackTime = (minutes*60 + seconds);
     console.log("Next track: " tracksInOrder[currentTrack.index + 1].track.text());
     console.log("Next track time: " + minutes + ":" + seconds);
     console.log("Next track seconds: " + nextTrackTime);
