@@ -1,6 +1,7 @@
 var tracks = [];
 var tracksInOrder = [];
 var current = 0;
+var ytplayer = document.getElementById("movie_player");
 
 //Function that populates the tracks array with jQuery <a> objects.
 var getTrackTimes = function(){
@@ -50,7 +51,6 @@ var getPlayTime = function(){
         seconds = parseInt(timeArray[1], 10);
         nextTrackTime = (minutes*60 + seconds);
     }else{
-        ytplayer = document.getElementById("movie_player");
         nextTrackTime = ytplayer.getDuration();
     }
 
@@ -68,9 +68,19 @@ var listenToCurrentTrack = function(){
     var playTime = getPlayTime();
     playNextTrack();
 
-    setTimeout(function(){
+    var timer = new Timer(function(){
         listenToCurrentTrack();
     }, playTime);
+
+    var onPlayerStateChange = function (state) {
+        if (state === 2, state === 3) {
+            timer.pause();
+        }else if(state === 1){
+            timer.resume();
+        }
+    };
+
+    ytplayer.addEventListener("onStateChange", "onPlayerStateChange");
 };
 
 listenToCurrentTrack();
