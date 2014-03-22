@@ -15,15 +15,12 @@
         ],
     "content_scripts": [
         {
-            "matches": ["youtube.com"],
-            "js": ["jquery.js", "scripts/utilities.js", "scripts/ytshuffle.js"]
+            "matches": ["http://*youtube.com/watch*"],
+            "js": ["scripts/jquery.js", "scripts/utilities.js", "scripts/ytshuffle.js"]
         }
     ],
     "browser_action": {
         "default_icon": "imgs/icon128.png",
         "default_popup": "display.html"
-    },
-    "background": {
-        "scripts": ["scripts/background.js"]
-    },
+    }
 }
