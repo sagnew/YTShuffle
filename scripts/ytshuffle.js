@@ -39,7 +39,7 @@ var getPlayTime = function(){
     var minutes = parseInt(timeArray[0], 10);
     var seconds = parseInt(timeArray[1], 10);
     var currentTrackTime = (minutes*60 + seconds);
-    console.log("Current track: " currentTrack.index);
+    console.log("Current track: " + currentTrack.index);
     console.log("Current track time: " + currentTrack.track.text());
     console.log("Current track seconds: " + currentTrackTime);
 
@@ -54,7 +54,7 @@ var getPlayTime = function(){
         nextTrackTime = ytplayer.getDuration();
     }
 
-    console.log("Next track: " tracksInOrder[currentTrack.index + 1].track.text());
+    console.log("Next track: " + tracksInOrder[currentTrack.index + 1].track.text());
     console.log("Next track time: " + minutes + ":" + seconds);
     console.log("Next track seconds: " + nextTrackTime);
 
@@ -68,10 +68,6 @@ var listenToCurrentTrack = function(){
     var playTime = getPlayTime();
     playNextTrack();
 
-    var timer = new Timer(function(){
-        listenToCurrentTrack();
-    }, playTime);
-
     var onPlayerStateChange = function (state) {
         if (state === 2, state === 3) {
             timer.pause();
@@ -79,6 +75,10 @@ var listenToCurrentTrack = function(){
             timer.resume();
         }
     };
+
+    var timer = new Timer(function(){
+        listenToCurrentTrack();
+    }, playTime);
 
     ytplayer.addEventListener("onStateChange", "onPlayerStateChange");
 };
