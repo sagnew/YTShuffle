@@ -68,19 +68,19 @@ var listenToCurrentTrack = function(){
     var playTime = getPlayTime();
     playNextTrack();
 
-    var onPlayerStateChange = function (state) {
-        if (state === 2, state === 3) {
-            timer.pause();
-        }else if(state === 1){
-            timer.resume();
-        }
-    };
-
     var timer = new Timer(function(){
         listenToCurrentTrack();
     }, playTime);
 
+    //Intentionally global...YouTube's video player API is garbage.
+    onPlayerStateChange = function (state) {
+        if (state === 2 || state === 3) {
+            timer.pause();
+        }else if(state === 1){
+            console.log("Video unpaused");
+            timer.resume();
+        }
+    };
+
     ytplayer.addEventListener("onStateChange", "onPlayerStateChange");
 };
-
-listenToCurrentTrack();

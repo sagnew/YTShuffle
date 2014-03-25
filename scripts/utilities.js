@@ -5,11 +5,13 @@ function Timer(callback, delay) {
     this.pause = function() {
         window.clearTimeout(timerId);
         remaining -= new Date() - start;
+        console.log("Pause. Remaining: " + remaining);
     };
 
     this.resume = function() {
         start = new Date();
         timerId = window.setTimeout(callback, remaining);
+        console.log("Resume. Remaining: " + remaining);
     };
 
     this.resume();
