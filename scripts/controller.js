@@ -8,5 +8,5 @@ var previous = function(){
     listenToCurrentTrack(playPreviousTrack);
 }
 
-$('#eow-description').append( "<input type='button' value='Next' onclick='next();'></input>");
-$('#eow-description').append( "<input type='button' value='Previous' onclick='previous();'></input>");
+$('#eow-description').prepend( "<input type='button' value='Next' onclick='next();'></input> <br>");
+$('#eow-description').prepend( "<input type='button' value='Previous' onclick='previous();'></input>");
