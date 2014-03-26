@@ -1,6 +1,7 @@
 var tracks = [];
 var tracksInOrder = [];
 var current = 0;
+var paused = false;
 var ytplayer = document.getElementById("movie_player");
 
 //Function that populates the tracks array with jQuery <a> objects.
@@ -74,11 +75,13 @@ var listenToCurrentTrack = function(){
 
     //Intentionally global...YouTube's video player API is garbage.
     onPlayerStateChange = function (state) {
-        if (state === 2 || state === 3) {
+        if(state === 2 || state === 3) {
             timer.pause();
-        }else if(state === 1){
+            paused = true;
+        }else if(state === 1 && paused){
             console.log("Video unpaused");
             timer.resume();
+            paused = false;
         }
     };
 
