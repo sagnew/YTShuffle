@@ -14,6 +14,10 @@ function Timer(callback, delay) {
         console.log("Resume. Remaining: " + remaining);
     };
 
+    this.clear = function(){
+        window.clearTimeout(timerId);
+    }
+
     this.resume();
 }
 

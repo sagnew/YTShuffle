@@ -1,11 +1,12 @@
 var tracks = [];
 var tracksInOrder = [];
 var current = 0;
+var timer;
 var paused = false;
 var ytplayer = document.getElementById("movie_player");
 
 //Function that populates the tracks array with jQuery <a> objects.
-var getTrackTimes = function(){
+var populateTracks = function(){
     tracks = [];
     $('#eow-description').find('a').each(function(index){
         if($(this).text().indexOf(":") !== -1){
@@ -33,6 +34,16 @@ var playNextTrack = function(){
     }
 };
 
+var playPreviousTrack = function(){
+    current -= 1;
+    if(current < 0){
+        //Re-shuffle the array
+        shuffle(tracks);
+        current = tracks.length;
+    }
+    tracks[current].track.click();
+};
+
 //Figure out how long the current track plays for
 var getPlayTime = function(){
     currentTrack = tracks[current];
@@ -46,7 +57,7 @@ var getPlayTime = function(){
 
     var nextTrackTime;
     //Now get the time of the next track
-    if(currentTrack.index < tracks.length){
+    if(currentTrack.index < tracks.length - 1){
         timeArray = tracksInOrder[currentTrack.index + 1].track.text().split(":");
         minutes = parseInt(timeArray[0], 10);
         seconds = parseInt(timeArray[1], 10);
@@ -64,13 +75,14 @@ var getPlayTime = function(){
 };
 
 //Play on repeat indefinitely for now with no way of stopping
-var listenToCurrentTrack = function(){
+//play is a function that determines which track to play
+var listenToCurrentTrack = function(play){
 
     var playTime = getPlayTime();
-    playNextTrack();
+    play();
 
-    var timer = new Timer(function(){
-        listenToCurrentTrack();
+    timer = new Timer(function(){
+        listenToCurrentTrack(playNextTrack);
     }, playTime);
 
     //Intentionally global...YouTube's video player API is garbage.
@@ -87,3 +99,5 @@ var listenToCurrentTrack = function(){
 
     ytplayer.addEventListener("onStateChange", "onPlayerStateChange");
 };
+
+listenToCurrentTrack(playNextTrack);
