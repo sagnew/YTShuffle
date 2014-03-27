@@ -1,0 +1,18 @@
+javascript: (function () {
+    var jq = document.createElement('script');
+    jq.src = "//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js";
+    document.getElementsByTagName('head')[0].appendChild(jq);
+    window.setTimeout(jQuery.noConflict(), 1000);
+
+    var utilities = document.createElement('script');
+    utilities.setAttribute('src', 'http://raw.githubusercontent.com/sagnew/YTShuffle/master/scripts/utilities.js');
+    document.body.appendChild(utilities);
+
+    var ytshuffle = document.createElement('script');
+    ytshuffle.setAttribute('src', 'http://raw.githubusercontent.com/sagnew/YTShuffle/master/scripts/ytshuffle.js.js');
+    document.body.appendChild(ytshuffle);
+
+    var controller = document.createElement('script');
+    controller.setAttribute('src', 'http://raw.githubusercontent.com/sagnew/YTShuffle/master/scripts/controller.js');
+    document.body.appendChild(controller);
+}());
