@@ -1,4 +1,6 @@
-YTShuffle
-=========
+SaveMyClips
+===========
 
-A Chrome extension that allows you to listen to full albums on shuffle that have the time of each track in the description, such as this: https://www.youtube.com/watch?v=_qcPtselacs
+A bookmarklet that keeps track of things that you copy in your clipboard so you don't lose them
+
+Download it at: http://bit.ly/187dzTl
