@@ -5,14 +5,14 @@ javascript: (function () {
     window.setTimeout(jQuery.noConflict(), 1000);
 
     var utilities = document.createElement('script');
-    utilities.setAttribute('src', 'http://raw.githubusercontent.com/sagnew/YTShuffle/master/scripts/utilities.js');
+    utilities.setAttribute('src', 'https://raw.githubusercontent.com/sagnew/YTShuffle/master/scripts/utilities.js');
     document.body.appendChild(utilities);
 
     var ytshuffle = document.createElement('script');
-    ytshuffle.setAttribute('src', 'http://raw.githubusercontent.com/sagnew/YTShuffle/master/scripts/ytshuffle.js.js');
+    ytshuffle.setAttribute('src', 'https://raw.githubusercontent.com/sagnew/YTShuffle/master/scripts/ytshuffle.js');
     document.body.appendChild(ytshuffle);
 
     var controller = document.createElement('script');
-    controller.setAttribute('src', 'http://raw.githubusercontent.com/sagnew/YTShuffle/master/scripts/controller.js');
+    controller.setAttribute('src', 'https://raw.githubusercontent.com/sagnew/YTShuffle/master/scripts/controller.js');
     document.body.appendChild(controller);
 }());
