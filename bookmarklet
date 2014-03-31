@@ -1,18 +1,23 @@
 javascript: (function () {
+    function addScripts()}{
+        jQuery.noConflict()
+
+        var utilities = document.createElement('script');
+        utilities.setAttribute('src', 'https://raw.githubusercontent.com/sagnew/YTShuffle/master/scripts/utilities.js');
+        document.body.appendChild(utilities);
+
+        var ytshuffle = document.createElement('script');
+        ytshuffle.setAttribute('src', 'https://raw.githubusercontent.com/sagnew/YTShuffle/master/scripts/ytshuffle.js');
+        document.body.appendChild(ytshuffle);
+
+        var controller = document.createElement('script');
+        controller.setAttribute('src', 'https://raw.githubusercontent.com/sagnew/YTShuffle/master/scripts/controller.js');
+        document.body.appendChild(controller);
+    }
+
     var jq = document.createElement('script');
-    jq.src = "//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js";
+    jq.src = "https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js";
     document.getElementsByTagName('head')[0].appendChild(jq);
-    window.setTimeout(jQuery.noConflict(), 1000);
+    window.setTimeout(addScripts, 1000);
 
-    var utilities = document.createElement('script');
-    utilities.setAttribute('src', 'https://raw.githubusercontent.com/sagnew/YTShuffle/master/scripts/utilities.js');
-    document.body.appendChild(utilities);
-
-    var ytshuffle = document.createElement('script');
-    ytshuffle.setAttribute('src', 'https://raw.githubusercontent.com/sagnew/YTShuffle/master/scripts/ytshuffle.js');
-    document.body.appendChild(ytshuffle);
-
-    var controller = document.createElement('script');
-    controller.setAttribute('src', 'https://raw.githubusercontent.com/sagnew/YTShuffle/master/scripts/controller.js');
-    document.body.appendChild(controller);
 }());
